@@ -6,11 +6,24 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "patch-package"
   },
   "dependencies": {
+    "axios": "^1.5.1",
+    "bulma": "^0.9.4",
+    "debug": "^4.3.4",
+    "linkedin-api-client": "^0.3.0",
+    "lottie-web": "^5.12.2",
+    "next": "latest",
+    "next-auth": "^4.23.1",
+    "qs": "^6.11.2",
     "react": "latest",
-    "react-dom": "latest",
-    "next": "latest"
+    "react-dom": "^18.2.0",
+    "sass": "^1.69.4"
+  },
+  "devDependencies": {
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0"
   }
 }

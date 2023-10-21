@@ -1,95 +1,72 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import github from "@/utils/github";
 
-export default function Home() {
+import styles from "./page.module.css";
+import App from "@/components/animationcli";
+import Sketchfab from "@/components/sketchfabIframes";
+
+async function getGithubProfileData() {
+  const { data, error } = await github.get(`/users/oswiil`);
+  if (error) throw error;
+
+  return data;
+}
+
+async function getGithubReposData() {
+  // Obtener lista de repositorios de GitHub
+  const { data, error } = await github.get(`/users/oswiil/repos`);
+  if (error) throw error;
+
+  return data;
+}
+
+export default async function Page() {
+  // Render data...
+  // const linkedinData = await getLinkedinData();
+  const user = await getGithubProfileData();
+  const repos = await getGithubReposData();
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <App />
+      <header></header>
+      <main className={styles.main}>
+        <div className="columns">
+          <div className="column">
+            {" "}
+            <Sketchfab />
+          </div>
+          <div className="column">
+            <div classNameName="profile">
+              <img src={user.avatar_url} alt={`${user.login}'s avatar`} />
+              <h2>{user.login}</h2>
+              <p>Followers: {user.followers}</p>
+              <p>Repositories: {user.public_repos}</p>
+            </div>
+          </div>
+
+          <div className="column">
+            {" "}
+            <div classNameName="repos">
+              <h2>Repositories</h2>
+              <ul>
+                {repos.map((repo) => (
+                  <li key={repo.id}>
+                    <a
+                      href={repo.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {repo.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="column">4</div>
         </div>
-      </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+        <h1>GitHub Profile Preview</h1>
+      </main>
+    </>
+  );
 }
