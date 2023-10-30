@@ -5,7 +5,7 @@ export default function Sketchfab() {
         <iframe
           title="Planta de Cristal"
           // frameborder="0"
-          allowFullscreen="true"
+          allowFullScreen="true"
           mozallowFullscreen="true"
           webkitallowFullscreen="true"
           allow="autoplay; fullscreen; xr-spatial-tracking"
@@ -45,7 +45,7 @@ export default function Sketchfab() {
         <iframe
           title="Kyul"
           // frameborder="0"
-          allowFullscreen="true"
+          allowFullScreen="true"
           mozallowFullscreen="true"
           webkitallowFullscreen="true"
           allow="autoplay; fullscreen; xr-spatial-tracking"
@@ -88,7 +88,7 @@ export default function Sketchfab() {
         <iframe
           title="Futurama"
           // frameBorder="0"
-          allowFullscreen="true"
+          allowFullScreen="true"
           mozallowFullscreen="true"
           webkitallowFullscreen="true"
           allow="autoplay; fullscreen; xr-spatial-tracking"

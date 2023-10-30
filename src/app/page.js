@@ -1,8 +1,8 @@
 import github from "@/utils/github";
 
 import styles from "./page.module.css";
-import App from "@/components/animationcli";
 import Sketchfab from "@/components/sketchfabIframes";
+import AnimationCli from "@/components/animationcli";
 
 async function getGithubProfileData() {
   const { data, error } = await github.get(`/users/oswiil`);
@@ -18,6 +18,11 @@ async function getGithubReposData() {
 
   return data;
 }
+// async function getGithubLanguagesRepo(name) {
+//   const { data, error } = await github.get(`/repos/oswiil/${name}/languages`);
+//   if (error) throw error;
+//   // return <div>{data}</div>;
+// }
 
 export default async function Page() {
   // Render data...
@@ -26,26 +31,23 @@ export default async function Page() {
   const repos = await getGithubReposData();
   return (
     <>
-      <App />
       <header></header>
       <main className={styles.main}>
+        {/* <AnimationCli></AnimationCli> */}
         <div className="columns">
           <div className="column">
-            {" "}
             <Sketchfab />
           </div>
           <div className="column">
-            <div classNameName="profile">
+            <div className="profile">
               <img src={user.avatar_url} alt={`${user.login}'s avatar`} />
               <h2>{user.login}</h2>
               <p>Followers: {user.followers}</p>
               <p>Repositories: {user.public_repos}</p>
             </div>
           </div>
-
           <div className="column">
-            {" "}
-            <div classNameName="repos">
+            <div className="repos">
               <h2>Repositories</h2>
               <ul>
                 {repos.map((repo) => (

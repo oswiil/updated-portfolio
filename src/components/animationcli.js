@@ -1,40 +1,36 @@
 "use client";
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import lottie from "lottie-web";
-import animation from "@/assets/animationhello.json";
-let animObj = null;
-class App extends React.Component {
-  componentDidMount() {
-    animObj = lottie.loadAnimation({
-      container: this.animBox,
+import dino from "@/assets/dinoloop.json";
+
+export default function AnimationCli() {
+  const [anim, setAnim] = useState();
+  const container = useRef(null);
+
+  useEffect(() => {
+    const animObj = lottie.loadAnimation({
+      container: container.current,
       renderer: "svg",
       loop: true,
       autoplay: true,
-      animationData: animation,
+      animationData: dino,
     });
-  }
+    setAnim(animObj);
 
-  handleStop = () => {
-    animObj.stop();
-  };
+    const handleStop = () => {
+      anim.stop();
+    };
 
-  handlePlay() {
-    animObj.play();
-  }
+    const handlePlay = () => {
+      anim.play();
+    };
 
-  render() {
     return (
-      <div className="App">
-        <div
-          className="animation-container"
-          ref={(ref) => (this.animBox = ref)}
-          onMouseEnter={this.handlePlay}
-          onMouseLeave={this.handleStop}
-        />
-        <div>{this.animObj}</div>
-      </div>
+      <div
+        ref={container}
+        onMouseEnter={handlePlay}
+        onMouseLeave={handleStop}
+      />
     );
-  }
+  });
 }
-
-export default App;
