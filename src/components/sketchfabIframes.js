@@ -5,9 +5,7 @@ export default function Sketchfab() {
         <iframe
           title="Planta de Cristal"
           // frameborder="0"
-          allowFullScreen="true"
-          mozallowFullscreen="true"
-          webkitallowFullscreen="true"
+          allowFullScreen={true}
           allow="autoplay; fullscreen; xr-spatial-tracking"
           xr-spatial-tracking="true"
           execution-while-out-of-viewport="true"
@@ -45,9 +43,7 @@ export default function Sketchfab() {
         <iframe
           title="Kyul"
           // frameborder="0"
-          allowFullScreen="true"
-          mozallowFullscreen="true"
-          webkitallowFullscreen="true"
+          allowFullScreen={true}
           allow="autoplay; fullscreen; xr-spatial-tracking"
           xr-spatial-tracking="true"
           execution-while-out-of-viewport="true"
@@ -88,9 +84,7 @@ export default function Sketchfab() {
         <iframe
           title="Futurama"
           // frameBorder="0"
-          allowFullScreen="true"
-          mozallowFullscreen="true"
-          webkitallowFullscreen="true"
+          allowFullScreen={true}
           allow="autoplay; fullscreen; xr-spatial-tracking"
           xr-spatial-tracking="true"
           execution-while-out-of-viewport="true"
