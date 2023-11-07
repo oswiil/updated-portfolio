@@ -2,22 +2,22 @@
 import React, { useRef, useState } from "react";
 
 import Lottie, { LottiePlayer } from "lottie-react";
-import dino from "@/assets/dinoloop.json";
 
-const AnimationCli = () => {
+const AnimationCli = ({ data, styles }) => {
   const container = useRef();
   const handleMouseLeave = () => {
     LottiePlayer.setSpeed(1);
   };
   const handleMouseEnter = () => {
-    LottiePlayer.setSpeed(3);
+    LottiePlayer.setSpeed(5);
   };
   return (
     <Lottie
+      style={styles}
       lottieRef={container}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      animationData={dino}
+      animationData={data}
       autoplay
       loop
     ></Lottie>
