@@ -1,25 +1,27 @@
 "use client";
-import React, { useRef, useState } from "react";
+
+import React, { useRef } from "react";
 
 import Lottie, { LottiePlayer } from "lottie-react";
 
-const AnimationCli = ({ data, styles }) => {
-  const container = useRef();
+const AnimationCli = ({ data }) => {
+  const container = useRef(LottiePlayer);
   const handleMouseLeave = () => {
-    LottiePlayer.setSpeed(1);
+    container.current.setSpeed(1);
   };
   const handleMouseEnter = () => {
-    LottiePlayer.setSpeed(5);
+    container.current.setSpeed(5);
   };
   return (
     <Lottie
-      style={styles}
+      className="anim-standard"
       lottieRef={container}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       animationData={data}
       autoplay
       loop
+      suppressHydrationWarning
     ></Lottie>
   );
 };
