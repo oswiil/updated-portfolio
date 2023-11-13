@@ -1,50 +1,45 @@
+import CardComponent from "@/components/card";
 import github from "@/utils/github";
-
-import styles from "./page.module.css";
 import Sketchfab from "@/components/sketchfabIframes";
 import AnimationCli from "@/components/animationcli";
-
+import "@/styles/_base.scss";
 import dino from "@/assets/dino.json";
 import education from "@/assets/education.json";
 import experience from "@/assets/experience.json";
 import projects from "@/assets/Projects.json";
-import CardComponent from "@/components/card";
-import fs from "fs";
+// import fs from "fs";
 import Repos from "@/assets/repos.json";
 import Progress from "@/components/progress";
-const style = {
-  height: "20%",
-};
-const style2 = {
-  height: "15%",
-};
+import next from "next";
+import dynamic from "next/dynamic";
 
-const style3 = {
-  width: "250px",
-  height: "250px",
-  alignItems: "center",
-  alignContent: "center",
-};
-async function getGithubProfileData() {
-  const { data, error } = await github.get(`/users/oswiil`);
-  if (error) throw error;
+// const style = {
+//   height: "20%",
+// };
+// const style2 = {
+//   height: "15%",
+// };
 
-  return data;
-}
+// async function getGithubProfileData() {
+//   const { data, error } = await github.get(`/users/oswiil`);
+//   if (error) throw error;
 
-async function getGithubReposData() {
-  // Obtener lista de repositorios de GitHub
-  const { data, error } = await github.get(`/users/oswiil/repos`);
+//   return data;
+// }
 
-  const jsonData = JSON.stringify(data);
-  const filePath = "src/assets/repos.json";
-  fs.writeFileSync(filePath, jsonData, "utf-8");
+// async function getGithubReposData() {
+//   // Obtener lista de repositorios de GitHub
+//   const { data, error } = await github.get(`/users/oswiil/repos`);
 
-  // data.map(async (repo) => {
-  //   const languages = await github.get(repo.languages_url);
-  // });
-}
-// async function getGithubLanguagesRepo(name) {
+//   const jsonData = JSON.stringify(data);
+//   const filePath = "src/assets/repos.json";
+//   fs.writeFileSync(filePath, jsonData, "utf-8");
+
+//   // data.map(async (repo) => {
+//   //   const languages = await github.get(repo.languages_url);
+//   // });
+// }
+// // async function getGithubLanguagesRepo(name) {
 //   const { data, error } = await github.get(`/repos/oswiil/${name}/languages`);
 //   if (error) throw error;
 //   // return <div>{data}</div>;
@@ -53,22 +48,32 @@ async function getGithubReposData() {
 export default async function Page() {
   // Render data...
   // const linkedinData = await getLinkedinData();
-  const repos = getGithubReposData();
+  const repos = Repos;
   // const user = await getGithubProfileData();
   return (
     <>
       <header></header>
-      <main className={styles.main}>
+      <main className="main">
         <div className="columns is-desktop p-6 is-multiline">
           <div className="column has-text-centered">
-            <AnimationCli data={dino} styles={style3} />
+            <AnimationCli data={dino} />
             <h5 className="title has-text-centered">Desarrollador Web</h5>
-            <div className="textarea">Hola asasa</div>
+            <p>
+              Aplicación Portfolio con {"NextJs"}Aplicación Portfolio
+              conAplicación Portfolio conAplicación Portfolio conAplicación
+              Portfolio conAplicación Portfolio conAplicación Portfolio
+              conAplicación Portfolio conAplicación Portfolio conAplicación
+              Portfolio conAplicación Portfolio conAplicación Portfolio
+              conAplicación Portfolio conAplicación Portfolio conAplicación
+              Portfolio conAplicación Portfolio conAplicación Portfolio
+              conAplicación Portfolio conAplicación Portfolio conAplicación
+              Portfolio con
+            </p>
           </div>
         </div>
         <div className="columns is-desktop p-6 is-multiline">
           <div className="column is-half">
-            <AnimationCli data={education} styles={style3} />
+            <AnimationCli data={education} />
             <h5 className="title has-text-centered">Education</h5>
             <CardComponent
               className="textarea"
@@ -85,36 +90,34 @@ export default async function Page() {
             />
           </div>
           <div className="column is-half">
-            <AnimationCli data={experience} styles={style3} />
-            <h5 className="title has-text-centered">Experience</h5>
-
             <CardComponent
               title={"Desarrollador web"}
               subtitle={"Consultor analista BaseTIS S.L."}
               text={""}
               imageUrl={""}
             />
+
             <CardComponent
               title={"Desarrollador .NET"}
               subtitle={"Programador Junior Indra S.A."}
               text={""}
               imageUrl={""}
             />
+            <AnimationCli data={experience} />
+            <h5 className="title has-text-centered">Experience</h5>
           </div>
           <div className="column is-offset">
             <div className="center">
-              <AnimationCli data={projects} styles={style3}>
-                s
-              </AnimationCli>
+              <AnimationCli data={projects} />
             </div>
             <h5 className="title has-text-centered">Projects</h5>
-            <div className="repos">
+            <div>
               <div className="columns is-multiline">
                 {repos.map(async (repo) => {
                   // const languages = await github.get(repo.languages_url);
                   return (
                     <div key={repo.id} className="column is-one-quarter">
-                      <div className="box">
+                      <span className="box">
                         <p className="title">{repo.name}</p>
                         <li>
                           <a
@@ -127,16 +130,15 @@ export default async function Page() {
                             {/* {languages} */}
                           </a>
                         </li>
-                      </div>
+                      </span>
                     </div>
                   );
                 })}
               </div>
             </div>
           </div>
-        </div>
 
-        {/* <div className="columns is-desktop">
+          {/* <div className="columns is-desktop">
           <div className="column">
             <div className="profile">
               <img
@@ -151,18 +153,9 @@ export default async function Page() {
             <p>Repositories: {user.public_repos}</p>
           </div>
         </div> */}
-
-        <div className="columns is-desktop">
-          <div className="column">
-            <Sketchfab />
-          </div>
-          <div className="column">
-            <Sketchfab />
-          </div>
         </div>
-
-        <h1>GitHub Profile Preview</h1>
       </main>
+      <footer className="has-text-centered">COPYRIGHT</footer>
     </>
   );
 }
